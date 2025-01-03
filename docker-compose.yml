@@ -1,0 +1,50 @@
+services:
+  # Database Service
+  db:
+    image: mysql:8.0
+    container_name: database
+    restart: always
+    environment:
+      MYSQL_DATABASE: shared_db
+      MYSQL_USER: wiem
+      MYSQL_PASSWORD: wiem
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # Laravel Service
+  laravel:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile
+    container_name: laravel
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_DATABASE: shared_db
+      DB_USERNAME: wiem
+      DB_PASSWORD: wiem
+    volumes:
+      - ./laravel:/var/www/html
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      - db
+
+  # Golang Service
+  golang:
+    image: golang:1.23
+    container_name: golang
+    working_dir: /app
+    volumes:
+      - ./golang:/app
+    ports:
+      - "8181:8181"
+    command: go run main.go
+    depends_on:
+      - db
+
+volumes:
+  db_data:

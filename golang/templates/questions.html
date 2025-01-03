@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Quiz - {{.Title}}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css"/>
+    </noscript>
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <span class="symbol"><img src="/images/logo.svg" alt=""/></span><span class="title">Quiz</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <div class="inner">
+                <header>
+                    <h1>{{.Title}}</h1>
+                </header>
+            </div>
+            <section class="tiles">
+            <form action="/result" method="POST">
+                <input type="hidden" name="category_id" value="{{.CategoryID}}">
+                {{range .Questions}}
+                    <h3>{{.Question_text}} {{.ID}}</h3>
+                    {{range $index, $option := .Options}}
+                        <input type="radio" id="option_{{.QuestionID}}_{{$index}}"
+                               name="answers[{{.QuestionID}}]" value="{{.Name}}">
+                        <label for="option_{{.QuestionID}}_{{$index}}">{{.Name}}</label><br>
+                    {{end}}
+                {{end}}
+                <button type="submit">Check Answers</button>
+            </form>
+
+
+                <a href="/">Back to Categories</a>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="copyright">
+                <li>&copy; All rights reserved</li>
+                <li>Wiem Louhichi</li>
+            </ul>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
