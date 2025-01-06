@@ -3,53 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Question;
+use App\Services\QuizService;
 
 class QuizController extends Controller
 {
     // Show all categories to the user
     public function showCategories()
     {
-        $categories = Category::all();
-        $a = $categories->count();
-        return view('homepage', compact('categories', 'a'));
+        $quizService = new QuizService();
+        $categories = $quizService->fetchCategories();
+        return view('homepage', compact('categories'));
     }
 
     // Show quiz questions for a selected category
-    public function startQuiz($categoryId)
+    public function startQuiz($categoryId, $error = null)
     {
-        // Get the category using its ID
-        $category = Category::findOrFail($categoryId);
+        $quizService = new QuizService();
+        $data = $quizService->fetchQuestions($categoryId);
+        $category = $data["category"];
+        $questions = $data["questions"];
 
-        // Fetch questions for the category ( in random order)
-        $questions = Question::where('category_id', $category->id)->inRandomOrder()->get();
-        return view('quiz.start', compact('category', 'questions'));
+        return view('quiz.start', compact('category', 'questions', 'error'));
     }
 
     // Check quiz answers and return results
     public function checkAnswers(Request $request)
     {
+        $quizService = new QuizService();
         $answers = $request->input('answers', []); // User-submitted answers
-        $results = [];
         $category_id = $request->input('category_id');
-
-        // Fetch all questions based on the provided question IDs
-        $questionIds = array_keys($answers);
-        $questions = Question::whereIn('id', $questionIds)->get();
-
-        foreach ($questions as $question) {
-            $submittedAnswer = $answers[$question->id] ?? null;
-
-            // Check if the submitted answer is correct
-            $results[$question->id] = [
-                'is_correct' => $question->correct_answer === $submittedAnswer,
-                'submitted_answer' => $submittedAnswer,
-            ];
+        if (count($answers) == 0) {
+            return $this->startQuiz($category_id, 'You have not answered anything');
         }
+        $data = $quizService->calculateScore($answers, $category_id);
 
-        $points = count(array_filter($results, fn($result) => $result['is_correct'])); // Count correct answers
-        $score = $points * 100 / count($answers);
+        $points = $data["points"];
+        $score = $data["score"];
+        $results = $data["results"];
+        $questions = $data["questions"];
+
 
         // Pass results, points, category_id, score, and questions to the view
         return view('quiz.results', compact('results', 'points', 'category_id', 'score', 'questions'));

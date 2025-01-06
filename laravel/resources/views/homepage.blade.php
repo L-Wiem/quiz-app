@@ -2,8 +2,8 @@
 @section('header')
     <div class="inner">
         <header>
-            <h1>Quiz Starten template designed by Quiz</h1>
-            <p>arcu elementum ipsum arcu vivamus quugiat veroeros aliquam. Lorem ipsum dolor sit </p>
+            <h2>Test your knowledge, challenge your mind, and explore the fascinating world of Computer Science!</h2>
+            <h3>Are you ready to start your journey? Choose a category and begin your quiz adventure now!</h3>
         </header>
     </div>
 @endsection

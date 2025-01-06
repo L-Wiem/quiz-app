@@ -34,15 +34,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="inner">
-            <ul class="copyright">
-                <li>&copy; All rights reserved</li>
-                <li>Wiem Louhichi</li>
-            </ul>
-        </div>
-    </footer>
 
 </div>
 
