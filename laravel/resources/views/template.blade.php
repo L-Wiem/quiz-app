@@ -11,33 +11,21 @@
     </noscript>
 </head>
 <body class="is-preload">
-<!-- Wrapper -->
 <div id="wrapper">
-
-    <!-- Header -->
     <header id="header">
         <div class="inner">
-
-            <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <span class="symbol"><img src="{{ asset('/images/logo.svg') }}" alt=""/></span><span class="title">Quiz</span>
             </a>
-
         </div>
     </header>
-
-    <!-- Main -->
     <div id="main">
         <div class="inner">
             @yield('header')
             @yield('content')
         </div>
     </div>
-
-
 </div>
-
-<!-- Scripts -->
 <script src="{{ asset('/js/jquery.min.js') }}"></script>
 <script src="{{ asset('/js/browser.min.js') }}"></script>
 <script src="{{ asset('/js/breakpoints.min.js') }}"></script>

@@ -22,12 +22,10 @@ class QuizService
             'questions' => $questions,
         ];
     }
-    public function calculateScore($answers)
+    public function calculateScore($answers, $category_id)
     {
         $results = [];
-
-        $questionIds = array_keys($answers);
-        $questions = Question::whereIn('id', $questionIds)->get();
+        $questions = Question::where('category_id', $category_id)->get();
 
         foreach ($questions as $question) {
             $submittedAnswer = $answers[$question->id] ?? null;

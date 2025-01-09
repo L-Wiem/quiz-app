@@ -220,7 +220,8 @@ h2 {
 }
 
 h3 {
-    font-size: 1em;
+    font-size: 2em;
+    font-color: black
 }
 
 h4 {
@@ -2223,7 +2224,7 @@ input[type="radio"] {
     -ms-appearance: none;
     appearance: none;
     display: block;
-    float: left;
+    /*float: left;*/
     margin-right: -2em;
     opacity: 0;
     width: 1em;
@@ -2247,7 +2248,7 @@ input[type="checkbox"] + label:before,
 input[type="radio"] + label:before {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    display: inline-block;
+    /*display: inline-block;*/
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
@@ -2479,6 +2480,9 @@ button,
     text-overflow: ellipsis;
     text-transform: uppercase;
     white-space: nowrap;
+}
+.tiles article > a .content :hover {
+    color: #ffffff;
 }
 
 input[type="submit"].icon:before,
@@ -3334,4 +3338,17 @@ body.is-menu-visible #menu .close {
         padding: 0 1.25em;
     }
 
+}
+
+input[type="radio"]:checked.red + label:before {
+    background: red;
+}
+input[type="radio"]:checked.red + label {
+    color: red;
+}
+input[type="radio"]:checked.green + label:before {
+    background: green;
+}
+input[type="radio"]:checked.green + label {
+    color: green;
 }

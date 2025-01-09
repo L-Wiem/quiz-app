@@ -20,7 +20,6 @@
                 <a href="{{ route('quiz.start', ['id' => $category->id]) }}">
                     <h2>{{$category->name}}</h2>
                     <div class="content">
-                        <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
                         <button class="default">Start </button>
                     </div>
                 </a>

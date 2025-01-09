@@ -23,7 +23,10 @@
                 @endforeach
 
             @endforeach
-           <div><button type="submit">Check Answers</button></div>
+           <div>
+               <button type="submit">Check Answers</button>
+               <a style="margin-left: 20px" href="/">Back to Categories</a>
+           </div>
         </form>
     </section>
 

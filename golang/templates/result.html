@@ -4,7 +4,9 @@
     <title>Quiz in Computer Science</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/fontawesome-all.min.css"/>
+    <link rel="stylesheet" href="/css/main.css?version=2"/>
+    <link rel="stylesheet" href="/css/app.css"/>
 
     <noscript>
         <link rel="stylesheet" href="/css/noscript.css"/>
@@ -36,12 +38,17 @@
 
                 <article class="style2">
 
-                        <h2>Your Score is: {{.Score}}</h2>
-
-                        <div class="content">
-                            <a href="questions?category_id={{.CategoryID}}">Restart the Quiz</a>
-                        </div>
-
+                    <h2>Your Score is: {{.Score}}</h2>
+                    {{if gt .Score 0}}
+                        <i class="fa fa-check-circle" style="color: green"></i> Congratulations !!! You have passed the
+                    Quiz!
+                    {{else}}
+                        <i class="fa fa-times-circle" style="color: #FF2D20"></i> Sorry ! You have failed
+                    {{end}}
+                    <div>
+                        <a href="questions?category_id={{.CategoryID}}" class="button btn-primary">Retry Quiz</a>
+                        <a href="/" class="button btn-primary">Back to Categories</a>
+                    </div>
                 </article>
 
             </section>
