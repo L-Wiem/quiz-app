@@ -95,7 +95,12 @@ quiz-app/
 ├── docker-compose.yml     
 └── README.md            
 ```
+## Modeling
+### Class Diagram
+![Class Diagram](./docs/Class-Diagram.png)
 
+### Sequence Diagram
+![Sequence Diagram](./docs/sequence-Diagram.png)
 ## Tests
 
 Unit, integration, and end-to-end tests for the golang code can be found in the ```golang``` folder.
