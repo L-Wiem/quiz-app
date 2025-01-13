@@ -37,7 +37,7 @@ class QuizService
         }
 
         $points = count(array_filter($results, fn($result) => $result['is_correct']));
-        $score = $points * 100 / count($answers);
+        $score = $points * 100 / count($questions);
         return [
             'points' => $points,
             'score' => $score,

@@ -226,13 +226,14 @@ func resultHandler(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		score := calculateScore(r, correctAnswers)
-
+		points, score  := calculateScore(r, correctAnswers)
 		// Data to pass to the template
 		data := struct {
-			Score      int
-			CategoryID string
+		    Points      int
+			Score       float32
+			CategoryID  string
 		}{
+		    Points:      points,
 			Score:      score,
 			CategoryID: categoryID,
 		}
@@ -242,15 +243,16 @@ func resultHandler(db *sql.DB) http.HandlerFunc {
 }
 
 // Calculate score based on user answers
-func calculateScore(r *http.Request, correctAnswers map[string]string) int {
-	score := 0
+func calculateScore(r *http.Request, correctAnswers map[string]string) (points int, score float32) {
+	points = 0
 	for questionID, correctAnswer := range correctAnswers {
 		userAnswer := r.FormValue(fmt.Sprintf("answers[%s]", questionID))
 		if userAnswer == correctAnswer {
-			score++
+			points++
 		}
 	}
-	return score
+    score = float32(points) * 100 / float32(len(correctAnswers));
+	return points, score
 }
 
 // Render HTML template

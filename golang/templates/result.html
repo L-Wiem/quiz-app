@@ -34,16 +34,17 @@
                     <h1>Your Result</h1>
                 </header>
             </div>
-            <section class="tiles">
+            <section>
 
                 <article class="style2">
 
-                    <h2>Your Score is: {{.Score}}</h2>
-                    {{if gt .Score 0}}
-                        <i class="fa fa-check-circle" style="color: green"></i> Congratulations !!! You have passed the
+                    <h2>Your Points are: {{.Points}}</h2>
+                    <h2>Your Score is: {{printf "%.2f" .Score}} %</h2>
+                    {{if gt .Score 50.0}}
+                    <div style="color:green;"><i class="fa fa-check-circle"></i> Congratulations !!! You have passed the</div>
                     Quiz!
                     {{else}}
-                        <i class="fa fa-times-circle" style="color: #FF2D20"></i> Sorry ! You have failed
+                    <div style="color:red;"><i class="fa fa-times-circle"></i> Sorry ! You have failed</div>
                     {{end}}
                     <div>
                         <a href="questions?category_id={{.CategoryID}}" class="button btn-primary">Retry Quiz</a>
@@ -54,17 +55,6 @@
             </section>
         </div>
     </div>
-
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="inner">
-            <ul class="copyright">
-                <li>&copy; All rights reserved</li>
-                <li>Wiem Louhichi</li>
-            </ul>
-        </div>
-    </footer>
 </div>
 
 <!-- Scripts -->

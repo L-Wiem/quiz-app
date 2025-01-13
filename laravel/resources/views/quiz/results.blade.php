@@ -7,7 +7,7 @@
     </header>
     <section class="Alternate">
 
-        @if($score > 0)
+        @if(round($score, 2) > 50)
             <i class="fa fa-check-circle" style="color: green"></i> Congratulations !!! You have passed the Quiz!
         @else
             <i class="fa fa-times-circle" style="color: #FF2D20"></i> Sorry ! You have failed
